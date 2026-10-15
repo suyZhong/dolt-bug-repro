@@ -4,7 +4,7 @@
 
 ## What happens
 
-`t1 LEFT JOIN t0 ON t0.c0 = NULL` should return `t1`'s row extended with NULL. Without a hint, it does. With the plan forced to a lookup join, the server panics and closes the connection. The server log shows `cannot write NULL to non-NULL field` from kvexec `newLookupKeyMapping`. The planner also picks this plan on its own on larger tables (for example 100 rows after `ANALYZE TABLE`). The hint just makes the repro small.
+`t1 LEFT JOIN t0 ON t0.c0 = NULL` should return `t1`'s row extended with NULL. Without a hint, it does. With the plan forced to a lookup join, the server panics and closes the connection. The server log shows `cannot write NULL to non-NULL field` from kvexec `newLookupKeyMapping`. The planner also picks this plan on its own on larger tables (for example 100 rows after `ANALYZE TABLE`). The hint just makes the repro small. The closed dolthub/dolt#10451 involved a lookup join on a non-NULL constant key.
 
 ## Test case
 

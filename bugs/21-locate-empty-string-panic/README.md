@@ -4,7 +4,7 @@
 
 ## What happens
 
-`LOCATE('a', '', 2)` fails with `panic recovered: runtime error: slice bounds out of range [1:0]`. MySQL returns 0. Start position 1 works. The closed dolthub/dolt#11393 covers negative start positions.
+`LOCATE('a', '', 2)` fails with `panic recovered: runtime error: slice bounds out of range [1:0]`. MySQL returns 0. Start position 1 works. The closed dolthub/dolt#11393 covers negative start positions; the open dolthub/dolt#11431 audits other `LOCATE` edge cases.
 
 ## Test case
 

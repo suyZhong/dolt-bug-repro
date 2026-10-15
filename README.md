@@ -64,6 +64,6 @@ mysql -h 127.0.0.1 -P 3306 -u root --force --table repro01 < bugs/01-index-misma
 
 ## Duplicate search
 
-We screened the titles of issues in dolthub/dolt and dolthub/go-mysql-server and searched for terms specific to each case. We found no exact match. The closest issues are linked in the individual reports (dolthub/dolt#9134, dolthub/dolt#10729, dolthub/dolt#11024, and dolthub/dolt#11393); their test cases behave differently or are fixed on master. A duplicate described only in an issue body could still have been missed. Please close or merge any cases already tracked.
+We screened the titles of issues in dolthub/dolt and dolthub/go-mysql-server and searched for terms specific to each case. We found no exact test case match. Related issues and possible overlaps are linked in the individual reports. A duplicate described only in an issue body could still have been missed. Please close or merge any cases already tracked.
 
 Three further findings from the same testing are omitted. `NOT EXISTS (... LIMIT 0)` is already tracked in dolthub/dolt#10493. Row-value `IN (subquery)` with a NULL field is listed in go-mysql-server's known-broken queries. A hash join on mixed-type keys (BOOLEAN and VARCHAR) that misses matches is covered by dolthub/dolt#10316.

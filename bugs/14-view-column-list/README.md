@@ -4,7 +4,7 @@
 
 ## What happens
 
-The view `v0(c0, c1, c2)` returns `11, 21, 31`. `WHERE c0 = 11` returns nothing and `WHERE c0 = 31` returns the row. `EXPLAIN PLAN` shows the pushed-down filter as `((t0.c2 + 1) = 11)`. 1.78.0 returns the correct results.
+The view `v0(c0, c1, c2)` returns `11, 21, 31`. `WHERE c0 = 11` returns nothing and `WHERE c0 = 31` returns the row. `EXPLAIN PLAN` shows the pushed-down filter as `((t0.c2 + 1) = 11)`. 1.78.0 returns the correct results. The closed dolthub/dolt#10741 covers a different view column-list test case involving `UNION ALL`.
 
 ## Test case
 

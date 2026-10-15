@@ -4,7 +4,7 @@
 
 ## What happens
 
-`JSON_EXTRACT('{"a": null}', '$.a[0]')` fails with `panic recovered: runtime error: invalid memory address or nil pointer dereference`. MySQL returns JSON `null`. The stack trace goes through `jsonpath.get_idx`, called from `(*JSONExtract).Eval`.
+`JSON_EXTRACT('{"a": null}', '$.a[0]')` fails with `panic recovered: runtime error: invalid memory address or nil pointer dereference`. MySQL returns JSON `null`. The stack trace goes through `jsonpath.get_idx`, called from `(*JSONExtract).Eval`. On Dolt 2.4.2, `'$.a[1]'` also panics; MySQL returns SQL NULL. The `[0]` expectation follows MySQL's path rule for non-array values. The open dolthub/dolt#7936 tracks related JSON lookup behavior on non-array values.
 
 ## Test case
 

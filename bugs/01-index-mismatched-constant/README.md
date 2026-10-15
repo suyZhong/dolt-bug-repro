@@ -6,10 +6,10 @@
 
 Each pair compares a primary-key column with a constant. The first query evaluates the predicate in the select list; the second uses it as a filter and returns an inconsistent result:
 
-- INT key, `c0 <> '1.5'`: the predicate is 1 for both rows, but the row `c0 = 1` is dropped. `EXPLAIN PLAN` shows the index range `{(NULL, 1)}, {(1, ∞)}`, consistent with converting `'1.5'` to `1` when building the range.
+- INT key, `c0 <> '1.5'`: the predicate is 1 for both rows, but the row `c0 = 1` is dropped. `EXPLAIN PLAN` shows the index range `{(NULL, 1)}, {(1, ∞)}`, consistent with converting `'1.5'` to `1` when building the range. This form may fall under the open dolthub/dolt#9739.
 - FLOAT key, `c0 <> CAST(... AS FLOAT)`: the predicate is 0, but the row is returned.
 - TIMESTAMP key, `c0 > '1969-12-18 02:32:34'`: the predicate is 1, but no row is returned. Releases before 2.3.5 raise `value "1969-12-18 02:32:34" is outside of timestamp range` instead.
-- TIME key, `c0 <> 2411793`: the predicate is 1, but no row is returned. This form is correct on 2.4.0 and wrong from 2.4.2.
+- TIME key, `c0 <> 2411793`: the predicate is 1, but no row is returned. This form is correct on 2.4.0 and wrong from 2.4.2. `2411793` is not a valid TIME value, but MySQL and Dolt's select list both evaluate the predicate as 1.
 
 Without the index, every filter returns the rows the select list predicts.
 

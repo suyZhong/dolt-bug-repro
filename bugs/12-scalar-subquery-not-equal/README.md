@@ -4,7 +4,7 @@
 
 ## What happens
 
-With an empty subquery, `c0 <> (SELECT c0 FROM t0)` is NULL, as the select list shows, but the `WHERE` returns the row. With a multi-row subquery, Dolt returns the row instead of raising `Subquery returns more than 1 row`. `EXPLAIN PLAN` shows the comparison rewritten to `LeftOuterJoinExcludingNulls` with a `1 IS NULL` filter.
+With an empty subquery, `c0 <> (SELECT c0 FROM t0)` is NULL, as the select list shows, but the `WHERE` returns the row. With a multi-row subquery, Dolt returns the row instead of raising `Subquery returns more than 1 row`. `EXPLAIN PLAN` shows the comparison rewritten to `LeftOuterJoinExcludingNulls` with a `1 IS NULL` filter. The closed dolthub/dolt#10699 concerns a related `NOT IN` subquery rewrite using `LeftOuterJoin` and a `1 IS NULL` filter.
 
 ## Test case
 

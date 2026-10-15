@@ -4,7 +4,7 @@
 
 ## What happens
 
-`100000000 MOD 0.0001` and `1e30 MOD 7` raise `division impossible`. MySQL returns `0.0000` and `5`. A control, `476098643 MOD 0.5962`, returns the expected result. Releases through 2.0.0 return `0.0000` for the first query but the wrong value `1` for the second.
+`100000000 MOD 0.0001` and `1e30 MOD 7` raise `division impossible`. MySQL returns `0.0000` and `5`. A control, `476098643 MOD 0.5962`, returns the expected result. Releases through 2.0.0 return `0.0000` for the first query and `1` for the second. MySQL treats the scientific-notation literal `1e30` as an approximate value, which explains why its remainder differs from exact `10^30 MOD 7`.
 
 ## Test case
 
