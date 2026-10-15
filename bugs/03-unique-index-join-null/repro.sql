@@ -1,0 +1,12 @@
+CREATE TABLE t0(c0 INT);
+CREATE TABLE t1(c0 INT);
+CREATE UNIQUE INDEX i1 ON t1(c0);
+INSERT INTO t0 VALUES (NULL), (1), (2);
+INSERT INTO t1 VALUES (NULL), (1), (2);
+
+SELECT SUM(t0.c0 = t1.c0) FROM t0, t1;
+-- 2
+
+SELECT * FROM t0 JOIN t1 ON t0.c0 = t1.c0 ORDER BY t0.c0;
+-- Expected: 1, 1 / 2, 2
+-- Actual:   NULL, NULL / 1, 1 / 2, 2
