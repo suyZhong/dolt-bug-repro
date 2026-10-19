@@ -22,7 +22,7 @@ SELECT * FROM v0 WHERE c0 = 11;
 -- Expected: 11, 21, 31
 -- Actual:   empty set
 
-SELECT * FROM v0 WHERE c0 = 31;
+SELECT * FROM v0 WHERE c2 = 31;
 -- Expected: empty set
 -- Actual:   11, 21, 31
 ```
